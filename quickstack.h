@@ -191,7 +191,7 @@ typedef struct stopper_symbol {
 
 typedef struct thread_info {
   thread_info(const int tid) : tid(tid) {
-    const string file_path = "/proc/" + std::to_string(tid) + "/comm";
+    const string file_path = "/proc/" + std::to_string((long long int)tid) + "/comm";
     std::ifstream comm_file(file_path);
     if (comm_file.is_open()) {
       std::getline(comm_file, name);
