@@ -503,7 +503,7 @@ static void read_proc_map_ent(const string& line,
 }
 
 static void read_proc_maps(int pid, proc_info& pinfo, symbol_table_map* stmap) {
-  const string maps_file_path = "/proc/" + std::to_string(pid) + "/maps";
+  const string maps_file_path = "/proc/" + std::to_string((long long int)pid) + "/maps";
   std::ifstream maps_file(maps_file_path);
   if (!maps_file.is_open()) {
     return;
@@ -949,7 +949,7 @@ static int ptrace_detach_proc(int pid) {
 int get_tgid(int target_pid) {
   int tgid = -1;
   const string status_file_path =
-      "/proc/" + std::to_string(target_pid) + "/status";
+      "/proc/" + std::to_string((long long int)target_pid) + "/status";
   std::ifstream status_file(status_file_path);
   if (!status_file.is_open()) {
     return tgid;
